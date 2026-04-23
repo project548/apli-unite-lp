@@ -1288,14 +1288,42 @@
       }
 
       .nav {
-        flex-direction: column;
-        border-radius: 24px;
-        padding: 16px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        border-radius: 22px;
+        padding: 10px 14px;
+        gap: 10px;
       }
 
       .nav,
       .nav-links,
       .nav-actions {
+        width: 100%;
+      }
+
+      .brand {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      .menu-toggle {
+        flex: 0 0 auto;
+        margin-left: auto;
+      }
+
+      .brand-mark { width: 38px; height: 38px; border-radius: 12px; }
+      .brand-copy strong { font-size: 0.98rem; }
+
+      .nav-links,
+      .nav-actions {
+        display: none;
+      }
+
+      .nav.is-open .nav-links,
+      .nav.is-open .nav-actions {
+        display: flex;
+        flex-direction: column;
         width: 100%;
       }
 
@@ -1821,12 +1849,15 @@
     }
     .pain-phones {
       position: relative;
-      height: 360px;
+      height: 380px;
       margin-top: 8px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .pain-phone {
       position: absolute;
-      width: 140px;
+      width: 168px;
       transition: transform 0.5s cubic-bezier(0.2,1,0.22,1);
     }
     .pain-phone-shell {
@@ -1835,6 +1866,7 @@
       border-radius: 24px;
       background: linear-gradient(145deg, #1c1c1e 0%, #3a3a3c 50%, #1c1c1e 100%);
       box-shadow: 0 18px 34px rgba(0,0,0,0.28);
+      overflow: hidden;
     }
     .pain-phone-shell .iphone-notch {
       width: 48px;
@@ -1842,101 +1874,126 @@
       top: 9px;
     }
     .pain-phone-shell .iphone-screen {
-      border-radius: 20px;
+      border-radius: 22px;
+      aspect-ratio: 10 / 20;
+      overflow: hidden;
+      background: #fff;
     }
-    .pain-phone { width: 160px; }
-    .pain-phone-1 { left: 0; top: 44px; transform: rotate(-8deg); z-index: 2; animation: floatPhoneA 7s ease-in-out infinite; }
-    .pain-phone-2 { left: 50%; margin-left: -80px; top: 0; transform: rotate(2deg); z-index: 3; animation: floatPhoneB 9s ease-in-out infinite; }
-    .pain-phone-3 { right: 0; top: 44px; transform: rotate(8deg); z-index: 2; animation: floatPhoneA 8s ease-in-out infinite; }
+    .pain-phone { width: 168px; }
+    .pain-phone-1 { left: 0; top: 40px; transform: rotate(-8deg); z-index: 2; animation: floatPhoneA 7s ease-in-out infinite; }
+    .pain-phone-2 { left: 50%; margin-left: -84px; top: 0; transform: rotate(2deg); z-index: 3; animation: floatPhoneB 9s ease-in-out infinite; }
+    .pain-phone-3 { right: 0; top: 40px; transform: rotate(8deg); z-index: 2; animation: floatPhoneA 8s ease-in-out infinite; }
     .pain-phone:hover { transform: rotate(0) translateY(-6px); animation-play-state: paused; z-index: 5; }
 
     /* pain-phone screens content */
-    .pp-hero {
-      position: relative;
-      height: 70px;
-      background-size: cover; background-position: center;
-      display: flex; align-items: flex-end;
-      padding: 6px 8px;
-    }
-    .pp-hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.55)); }
-    .pp-hero-title { position: relative; color: #fff; font-size: 7.5px; font-weight: 800; line-height: 1.3; }
-    .pp-quiz { padding: 6px 8px; }
-    .pp-quiz-q { display: block; font-size: 7px; color: #0f5a5f; line-height: 1.35; margin-bottom: 4px; }
-    .pp-quiz-opt { display: flex; align-items: flex-start; gap: 4px; font-size: 6.4px; color: #3b4a56; padding: 3px 5px; background: #f4fffd; border-radius: 4px; margin-bottom: 2px; line-height: 1.3; }
-    .pp-radio { width: 7px; height: 7px; border-radius: 50%; border: 1.2px solid var(--teal); display: inline-block; flex-shrink: 0; margin-top: 1px; }
-    .pp-radio-on { background: var(--teal); }
-    .pp-quiz-divider { height: 1px; background: #eef3f6; margin: 2px 8px; }
+    .iphone-screen { display: flex; flex-direction: column; background: #fff; }
     .pp-tabbar {
-      margin-top: auto; padding: 6px 12px; display: flex; justify-content: space-between;
+      margin-top: auto; padding: 6px 14px 8px; display: flex; justify-content: space-around;
       border-top: 1px solid #eef3f6; background: #fff;
     }
-    .pp-tabbar span { font-size: 10px; color: #7b8a94; }
-    .iphone-screen.pp-screen { display: flex; flex-direction: column; }
+    .pp-tabbar span { font-size: 10px; color: #9aa7b0; line-height: 1; }
 
+    /* Phone 1: E-learning quiz */
+    .pp-hero {
+      position: relative;
+      height: 90px;
+      background-size: cover; background-position: center;
+      display: flex; align-items: flex-end;
+      padding: 18px 8px 7px;
+    }
+    .pp-hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.6)); }
+    .pp-hero-title { position: relative; color: #fff; font-size: 8px; font-weight: 800; line-height: 1.3; }
+    .pp-quiz { padding: 7px 8px 4px; flex: 1; overflow: hidden; }
+    .pp-quiz-q { display: block; font-size: 7.2px; color: #0f5a5f; line-height: 1.35; margin: 6px 0 4px; font-weight: 800; }
+    .pp-quiz-q:first-child { margin-top: 0; }
+    .pp-quiz-q em { font-style: normal; color: var(--teal); font-family: "Space Grotesk", sans-serif; font-weight: 900; margin-right: 2px; }
+    .pp-quiz-opt {
+      display: flex; align-items: flex-start; gap: 4px;
+      font-size: 6.5px; color: #3b4a56;
+      padding: 3px 5px; background: #f4fafb; border-radius: 4px;
+      margin-bottom: 2px; line-height: 1.3;
+    }
+    .pp-radio { width: 7px; height: 7px; border-radius: 50%; border: 1.2px solid var(--teal); display: inline-block; flex-shrink: 0; margin-top: 1px; background: #fff; }
+    .pp-radio-on { background: var(--teal); box-shadow: inset 0 0 0 1.5px #fff; border-color: var(--teal); }
+
+    /* Phone 2: Seminar videos */
     .pp-segtabs {
-      padding: 22px 6px 6px;
-      display: flex; gap: 2px; background: linear-gradient(180deg, #e8f4f5, #fff);
+      padding: 18px 6px 5px;
+      display: flex; gap: 2px;
+      background: #fff; border-bottom: 1px solid #eef3f6;
     }
     .pp-segtabs span {
-      flex: 1; text-align: center; font-size: 6.4px; padding: 4px 2px; border-radius: 4px;
-      color: #7b8a94; font-weight: 700;
+      flex: 1; text-align: center; font-size: 6.6px; padding: 4px 2px; border-radius: 4px;
+      color: #9aa7b0; font-weight: 700;
     }
     .pp-segtabs .is-on { background: var(--teal-deep); color: #fff; }
     .pp-video {
-      position: relative; height: 90px; margin: 0 6px;
+      position: relative; height: 80px; margin: 6px;
       background-size: cover; background-position: center;
       border-radius: 6px; overflow: hidden;
     }
     .pp-video::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7)); }
     .pp-video-title {
       position: absolute; left: 6px; right: 6px; bottom: 14px; z-index: 1;
-      color: #fff; font-size: 6.8px; font-weight: 700; line-height: 1.3;
+      color: #fff; font-size: 7px; font-weight: 700; line-height: 1.3;
     }
     .pp-video-controls {
       position: absolute; left: 6px; right: 6px; bottom: 4px; z-index: 1;
       display: flex; gap: 4px; align-items: center; color: #fff; font-size: 6px;
     }
     .pp-video-controls span:first-child { font-size: 8px; }
+    .pp-video-bar { flex: 1; height: 2px; background: rgba(255,255,255,0.35); border-radius: 99px; position: relative; }
+    .pp-video-bar span { position: absolute; left: 0; top: 0; width: 35%; height: 100%; background: #fff; border-radius: 99px; }
     .pp-course-bar {
-      margin: 6px; padding: 5px 8px; border-radius: 4px;
-      background: #0f5a5f; color: #fff;
+      margin: 0 6px; padding: 5px 8px; border-radius: 5px;
+      background: var(--teal-deep); color: #fff;
       display: flex; align-items: center; gap: 6px;
     }
-    .pp-course-bar small { font-size: 5.6px; padding: 2px 5px; background: rgba(255,255,255,0.2); border-radius: 3px; line-height: 1; }
-    .pp-course-bar strong { font-size: 6.6px; font-weight: 700; }
+    .pp-course-bar small { font-size: 5.8px; padding: 2px 5px; background: rgba(255,255,255,0.2); border-radius: 3px; line-height: 1; }
+    .pp-course-bar strong { font-size: 6.8px; font-weight: 700; }
     .pp-course-tabs {
-      margin: 0 6px; display: flex; gap: 2px;
-      border-bottom: 1px solid #eef3f6; padding-bottom: 2px;
+      margin: 6px 6px 0; display: flex; gap: 2px;
+      border-bottom: 1px solid #eef3f6;
     }
-    .pp-course-tabs span { flex: 1; text-align: center; font-size: 6.5px; padding: 4px 2px; color: #7b8a94; font-weight: 700; border-bottom: 2px solid transparent; }
+    .pp-course-tabs span { flex: 1; text-align: center; font-size: 6.6px; padding: 5px 2px; color: #9aa7b0; font-weight: 700; border-bottom: 2px solid transparent; }
     .pp-course-tabs .is-on { color: var(--teal-deep); border-bottom-color: var(--teal-deep); }
     .pp-course-grid {
       padding: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
     }
-    .pp-course-grid > div { background: #f4fffd; border-radius: 4px; padding: 3px; }
-    .pp-course-grid > div > div { height: 34px; border-radius: 3px; background-size: cover; background-position: center; }
+    .pp-course-grid > div { background: #f4fafb; border-radius: 4px; padding: 3px; }
+    .pp-course-grid > div > div { height: 30px; border-radius: 3px; background-size: cover; background-position: center; }
     .pp-course-grid small { display: block; font-size: 6px; color: #0f5a5f; margin-top: 3px; font-weight: 700; }
 
-    .pp-brand-bar { padding: 22px 10px 4px; text-align: right; border-bottom: 1px solid #eef3f6; }
-    .pp-brand-bar strong { font-size: 8px; color: #d93838; font-weight: 900; }
+    /* Phone 3: Manual */
+    .pp-brand-bar {
+      padding: 18px 10px 5px;
+      display: flex; align-items: center; justify-content: flex-end; gap: 4px;
+      border-bottom: 1px solid #eef3f6;
+    }
+    .pp-brand-mark {
+      width: 12px; height: 12px; border-radius: 2px; background: #d93838; color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: "Space Grotesk", sans-serif; font-size: 7px; font-weight: 900;
+    }
+    .pp-brand-bar strong { font-size: 8.5px; color: #0f5a5f; font-weight: 900; }
     .pp-mnl-hero {
-      position: relative; height: 85px; margin: 0;
+      position: relative; height: 95px; margin: 0;
       background-size: cover; background-position: center;
       display: flex; align-items: center; justify-content: center;
     }
-    .pp-mnl-hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.3); }
+    .pp-mnl-hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.28); }
     .pp-play {
-      position: relative; z-index: 1; width: 26px; height: 26px;
-      border-radius: 50%; background: rgba(255,255,255,0.9);
+      position: relative; z-index: 1; width: 28px; height: 28px;
+      border-radius: 50%; background: rgba(255,255,255,0.92);
       display: flex; align-items: center; justify-content: center;
       font-size: 10px; color: #0f5a5f;
     }
-    .pp-mnl-title { padding: 6px 8px; }
-    .pp-mnl-title small { display: block; font-size: 6px; color: #7b8a94; }
+    .pp-mnl-title { padding: 7px 9px; position: relative; }
+    .pp-mnl-title small { display: block; font-size: 6px; color: #9aa7b0; }
     .pp-mnl-title strong { display: block; font-size: 11px; color: #0f5a5f; font-weight: 900; line-height: 1.2; margin: 2px 0; letter-spacing: -0.01em; }
-    .pp-mnl-title em { font-style: normal; font-size: 6px; color: #fff; background: #d93838; padding: 2px 6px; border-radius: 3px; }
+    .pp-mnl-title em { position: absolute; right: 9px; bottom: 8px; font-style: normal; font-size: 6px; color: #fff; background: #d93838; padding: 2px 6px; border-radius: 3px; font-weight: 700; }
     .pp-mnl-thumb {
-      margin: 4px 8px 0; height: 60px; border-radius: 6px;
+      margin: 0 9px 6px; height: 60px; border-radius: 6px;
       background-size: cover; background-position: center;
     }
 
@@ -3242,7 +3299,6 @@
             <span class="brand-mark" aria-hidden="true"></span>
             <span class="brand-copy">
               <strong>Apli UNITE</strong>
-              <span>Portal app mockup for startup founders</span>
             </span>
           </a>
 
@@ -3270,7 +3326,6 @@
       <section class="hero">
         <div class="container hero-grid">
           <div class="hero-copy" data-reveal>
-            <span class="eyebrow">Playful portal experience for modern startups</span>
             <span class="scribble">light, smart, unite.</span>
             <h1>
               情報をひとつに。<br>
@@ -3282,7 +3337,7 @@
             </p>
 
             <div class="hero-actions">
-              <a class="button button-primary" href="#cta">30秒で相談する</a>
+              <a class="button button-primary" href="#cta">相談する</a>
               <a class="button button-secondary" href="#pricing">導入事例を見る</a>
             </div>
 
@@ -3405,14 +3460,6 @@
             </p>
           </div>
 
-          <div class="service-tabs" data-reveal style="--delay: 0.08s;">
-            <button class="service-tab is-active" data-filter="all">すべて</button>
-            <button class="service-tab" data-filter="home">情報集約</button>
-            <button class="service-tab" data-filter="access">アクセス</button>
-            <button class="service-tab" data-filter="faq">FAQ最適化</button>
-            <button class="service-tab" data-filter="culture">カルチャー</button>
-          </div>
-
           <div class="service-grid voice-grid">
             <article class="voice-card" data-reveal data-cat="home" style="background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=70&auto=format&fit=crop');">
               <div class="voice-overlay"></div>
@@ -3486,47 +3533,44 @@
                   <span class="pain-callout pain-callout-2">社内外のセミナーを動画配信</span>
                   <span class="pain-callout pain-callout-3">マニュアルをペーパーレスで配信</span>
 
+                  <!-- Phone 1: E-learning quiz -->
                   <div class="pain-phone pain-phone-1">
                     <div class="pain-phone-shell">
                       <div class="iphone-notch"></div>
-                      <div class="iphone-screen" style="height: 360px;">
+                      <div class="iphone-screen">
                         <div class="pp-hero" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=320&q=60&auto=format&fit=crop');">
                           <div class="pp-hero-overlay"></div>
-                          <strong class="pp-hero-title">現場での機械取り扱いに関する理解度チェック</strong>
+                          <strong class="pp-hero-title">建設現場での機械取り扱いに関する<br>理解度チェック</strong>
                         </div>
                         <div class="pp-quiz">
-                          <b class="pp-quiz-q">Q1 フォークリフトの安全作業に関して、正しい項目を選択してください。</b>
+                          <b class="pp-quiz-q"><em>Q1</em> フォークリフトの安全作業に関して、正しい項目を選択してください。</b>
                           <div class="pp-quiz-opt"><span class="pp-radio"></span>走行時はフォークを地上から15cmほど上げて走行する</div>
                           <div class="pp-quiz-opt"><span class="pp-radio"></span>最大荷重1t以上は特別研修修了者が運転する</div>
                           <div class="pp-quiz-opt"><span class="pp-radio"></span>定期自主検査は1ヶ月以内に行うルールとなっている</div>
                           <div class="pp-quiz-opt"><span class="pp-radio"></span>フォークの荷崩れ修正をしたい場合は、オペレーターが運転席から身を乗り出して確認する</div>
-                        </div>
-                        <div class="pp-quiz-divider"></div>
-                        <div class="pp-quiz">
-                          <b class="pp-quiz-q">Q2 ディスクグラインダーと電動ドリル使用時、正しい項目を選択してください。</b>
+                          <b class="pp-quiz-q"><em>Q2</em> ディスクグラインダーと電動ドリル使用時、正しい項目を選択してください。</b>
                           <div class="pp-quiz-opt"><span class="pp-radio pp-radio-on"></span>作業場によってはディスクグラインダーには遮蔽をつけて作業することを推奨する</div>
                         </div>
                         <div class="pp-tabbar">
-                          <span>⌂</span><span>♡</span><span>☰</span><span>◎</span>
+                          <span>⌂</span><span>✓</span><span>♡</span><span>▦</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
+                  <!-- Phone 2: Seminar videos -->
                   <div class="pain-phone pain-phone-2">
                     <div class="pain-phone-shell">
                       <div class="iphone-notch"></div>
-                      <div class="iphone-screen" style="height: 380px;">
+                      <div class="iphone-screen">
                         <div class="pp-segtabs">
                           <span>部門別</span><span class="is-on">年次別</span><span>テーマ別</span><span>新着</span>
                         </div>
-                        <div class="pp-video" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=320&q=60&auto=format&fit=crop');">
+                        <div class="pp-video" style="background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=360&q=60&auto=format&fit=crop');">
                           <div class="pp-video-title">テクニカル リスキリング セミナー Part2</div>
                           <div class="pp-video-controls">
                             <span>▶</span>
-                            <span style="flex:1;height:2px;background:rgba(255,255,255,0.35);border-radius:99px;position:relative;">
-                              <span style="position:absolute;left:0;top:0;width:35%;height:100%;background:#fff;border-radius:99px;"></span>
-                            </span>
+                            <span class="pp-video-bar"><span></span></span>
                             <small>🔊</small><small>⤢</small>
                           </div>
                         </div>
@@ -3539,29 +3583,31 @@
                         </div>
                         <div class="pp-course-grid">
                           <div>
-                            <div style="background-image:url('https://images.unsplash.com/photo-1552581234-26160f608093?w=160&q=60&auto=format&fit=crop');"></div>
+                            <div style="background-image:url('https://images.unsplash.com/photo-1552581234-26160f608093?w=200&q=60&auto=format&fit=crop');"></div>
                             <small>IT知識セミナー ›</small>
                           </div>
                           <div>
-                            <div style="background-image:url('https://images.unsplash.com/photo-1543269664-76bc3997d9ea?w=160&q=60&auto=format&fit=crop');"></div>
+                            <div style="background-image:url('https://images.unsplash.com/photo-1543269664-76bc3997d9ea?w=200&q=60&auto=format&fit=crop');"></div>
                             <small>最先端技術セミナー ›</small>
                           </div>
                         </div>
                         <div class="pp-tabbar">
-                          <span>⌂</span><span>♡</span><span>☰</span><span>◎</span>
+                          <span>🔖</span><span>✓</span><span>♡</span><span>▦</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
+                  <!-- Phone 3: Manual -->
                   <div class="pain-phone pain-phone-3">
                     <div class="pain-phone-shell">
                       <div class="iphone-notch"></div>
-                      <div class="iphone-screen" style="height: 360px;">
+                      <div class="iphone-screen">
                         <div class="pp-brand-bar">
+                          <span class="pp-brand-mark">Y</span>
                           <strong>矢振建設</strong>
                         </div>
-                        <div class="pp-mnl-hero" style="background-image:url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=320&q=60&auto=format&fit=crop');">
+                        <div class="pp-mnl-hero" style="background-image:url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=360&q=60&auto=format&fit=crop');">
                           <div class="pp-play">▶</div>
                         </div>
                         <div class="pp-mnl-title">
@@ -3569,9 +3615,9 @@
                           <strong>安全ダイジェスト<br>2022 最新版</strong>
                           <em>ダイジェスト</em>
                         </div>
-                        <div class="pp-mnl-thumb" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=320&q=60&auto=format&fit=crop');"></div>
+                        <div class="pp-mnl-thumb" style="background-image:url('https://images.unsplash.com/photo-1541976076758-347942db1970?w=320&q=60&auto=format&fit=crop');"></div>
                         <div class="pp-tabbar">
-                          <span>⌂</span><span>♡</span><span>☰</span><span>◎</span>
+                          <span>🔖</span><span>✓</span><span>♡</span><span>▦</span>
                         </div>
                       </div>
                     </div>
@@ -3837,9 +3883,8 @@
 
       <section class="cta-section" id="cta">
         <div class="container">
-          <div class="cta-card" data-reveal>
+          <div class="cta-card" data-reveal style="width: 1200px">
             <div>
-              <span class="section-kicker">CTA</span>
               <strong>社内の情報導線、<br>そろそろ整えませんか？</strong>
               <p>
                 情報集約・問い合わせ削減・カルチャー浸透を、ひとつの体験で。<br>
@@ -3949,23 +3994,6 @@
       item.addEventListener("click", () => {
         menuItems.forEach(m => m.classList.remove("is-active"));
         item.classList.add("is-active");
-      });
-    });
-
-    // Service tabs filter
-    const tabs = document.querySelectorAll(".service-tab");
-    const serviceCards = document.querySelectorAll(".service-grid .card");
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        tabs.forEach(t => t.classList.remove("is-active"));
-        tab.classList.add("is-active");
-        const f = tab.dataset.filter;
-        serviceCards.forEach(c => {
-          c.classList.remove("is-dim", "is-highlight");
-          if (f === "all") return;
-          if (c.dataset.cat === f) c.classList.add("is-highlight");
-          else c.classList.add("is-dim");
-        });
       });
     });
 
